@@ -1,10 +1,17 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {Heading} from './components/Heading/Heading';
+import {Button} from "./components/Button/Button";
+import {ListOfRooms} from "./components/Lists/ListOfRooms";
+
 
 function App() {
   return (
     <div className="App">
+      <Heading title="React App" variant="secondary"/>
+      <Button/>
+      <ListOfRooms/>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
