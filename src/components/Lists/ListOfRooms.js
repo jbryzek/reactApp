@@ -18,6 +18,8 @@ export const ListOfRooms = () =>{
         <>
             <span>
                 Name: {room['A']?.lng}
+=======
+                Name: {room['A']?.name}
             </span>
         </>
     )
