@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import API from '../api'
 
-export const ListOfRooms = () =>{
-     const [room ,setRoom] = useState([]);
+export const ListOfRooms = () => {
+    const [room, setRoom] = useState([]);
     // const [age, setAge] = useState([])
     // const [lng, setLng] = useState([])
 
@@ -11,16 +11,13 @@ export const ListOfRooms = () =>{
     useEffect(() => {
         API.get('/rooms')
             .then((result) => setRoom(result.data))
-            .catch((err) =>console.error(err))
-    },[]);
+            .catch((err) => console.error(err))
+    }, []);
 
-    return(
+    return (
         <>
-            <span>
-                Name: {room['A']?.lng}
-=======
-                Name: {room['A']?.name}
-            </span>
+            <span>Lng: {room['A']?.lng}</span><br/>
+            <span>Name: {room['A']?.name}</span>
         </>
     )
 }
