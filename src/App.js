@@ -9,7 +9,7 @@ import {ListOfRooms} from "./components/Lists/ListOfRooms";
 function App() {
   return (
     <div className="App">
-      <Heading title="React App" variant="secondary"/>
+      <Heading title="Conference Schedule" variant="secondary"/>
       <Button/>
       <ListOfRooms/>
       <header className="App-header">
