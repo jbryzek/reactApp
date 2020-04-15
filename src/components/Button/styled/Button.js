@@ -8,5 +8,6 @@ export const SButton = styled.button`
     display: flex;
     font-weight: 400;
     text-transform: uppercase;
-    padding: 15px 25px;
+    padding: 5px 20px;
+    display: inline-block;
 `;
