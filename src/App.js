@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {Heading} from './components/Heading/Heading';
 import {Button} from "./components/Button/Button";
@@ -13,9 +12,9 @@ function App() {
     return (
         <div className="App">
             <Heading title="Conference Schedule" variant="secondary"/>
-            <Button/>
-            <ListOfRooms/>
             <Router>
+                <Button/>
+                <ListOfRooms/>
                 <Navigation/>
                 <Routing/>
             </Router>
