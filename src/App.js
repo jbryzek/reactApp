@@ -1,11 +1,9 @@
 import React from 'react';
 import './App.css';
 import {Heading} from './components/Heading/Heading';
-import {Button} from "./components/Button/Button";
-import {ListOfRooms} from "./components/Lists/ListOfRooms";
-import {Navigation} from "./components/Navigation";
 import {BrowserRouter as Router} from "react-router-dom";
 import {Routing} from "./components/Routing";
+import {NavBar} from "./components/NavBar";
 
 
 function App() {
@@ -13,9 +11,7 @@ function App() {
         <div className="App">
             <Heading title="Conference Schedule" variant="secondary"/>
             <Router>
-                <Button/>
-                <ListOfRooms/>
-                <Navigation/>
+                <NavBar/>
                 <Routing/>
             </Router>
             {/*<header className="App-header">*/}

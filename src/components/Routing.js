@@ -4,21 +4,28 @@ import {
     Route
 } from "react-router-dom";
 import {ListOfRooms} from "./Lists/ListOfRooms";
-import {Button} from "./Button/Button";
-import {LoginForm} from "./Login/LoginForm";
+import {Schedule} from "./Lists/Schedule";
+import {Sessions} from "./Lists/Sessions";
+import {Presentations} from "./Lists/Presentations";
 
 export const Routing = () =>{
     return(
         <>
             <Switch>
                 <Route exact path = "/">
-                    <Button/>
+                    main
                 </Route>
                 <Route path="/rooms">
                     <ListOfRooms/>
                 </Route>
-                <Route path="/login">
-                    <LoginForm/>
+                <Route path="/schedules">
+                    <Schedule/>
+                </Route>
+                <Route path="/sessions">
+                    <Sessions/>
+                </Route>
+                <Route path="/presentations">
+                    <Presentations/>
                 </Route>
             </Switch>
         </>

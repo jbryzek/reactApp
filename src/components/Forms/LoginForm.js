@@ -1,11 +1,11 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
-import {Button} from "react-bootstrap";
+import {Button, Modal} from "react-bootstrap";
 
 
 export const LoginForm=()=>{
     const handleSubmit=()=>{
-        console.log("im alive");
+        console.log("im alive"); //alert jesli nie ma takiego
     };
     const showPassword=()=>{
         let x = document.getElementById("formPassword");
@@ -28,7 +28,7 @@ export const LoginForm=()=>{
             <Form.Group controlId="formCheckbox">
                 <Form.Check type="checkbox" label="Show password" onClick={showPassword}/>
             </Form.Group>
-            <Button variant="primary" type="submit">Submit</Button>
+            <Button variant="primary" type="submit">Log in</Button>
         </Form>
     )
 };
