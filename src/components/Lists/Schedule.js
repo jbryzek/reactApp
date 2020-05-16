@@ -5,25 +5,28 @@ import {
 } from "react-router-dom";
 
 export const Schedule = (props) =>{
-
-    const {id}=useParams();
     const [schedule, setSchedule] = useState([]);
+    const params={
+        "day":window.location.href.split('=')[1]
+    };
+
+    const getDay = ()=>{
+        return window.location.href.split('=')[1]
+    };
 
     useEffect(() => {
-        API.get('/schedules',{day:id})
+        API.get('/schedules',params)
             .then((result) => setSchedule(result.data))
             .catch((err) => console.error(err))
-    }, [id]);
+    }, []);
 
 
     return(
         <>
-            <span>{schedule.id} {console.log(id + " "+ props.location.aboutProps)}</span>
+            <span>{getDay()}</span><br/>
+            <span>tu: {schedule[0]}</span>
             {/*<ul>*/}
-            {/*    {schedule.id.map(session => <li key={session.start}>{session.start}</li>)}*/}
-            {/*</ul>*/}
-            {/*<ul>*/}
-            {/*    {schedule[id].map.forEach(<li>item.start</li>)}*/}
+            {/*    {schedule[0]['TUESDAY'].map(session => <li key={session.start}>{session.start}</li>)}*/}
             {/*</ul>*/}
         </>
     )

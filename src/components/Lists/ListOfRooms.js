@@ -16,12 +16,8 @@ export const ListOfRooms = (props) => {
         <>
             {/*<span>Lng: {rooms['A']?.lng}</span><br/>*/}
             {/*<span>Name: {rooms['A']?.name}</span><br/>*/}
-            <span> {Object.keys(rooms)}</span>
             <ul>
-                {Object.keys(rooms).map(room => <li key={room.name}>{room.start}</li>)}
-            </ul>
-            <ul>
-                {Object.keys(rooms).forEach(room =><li key={room.name}>room.name</li>)}
+                {Object.values(rooms).map((room) => <li key={room}> {room.name}</li>)}
             </ul>
             <span>{rooms[localization]?.name}</span>
         </>

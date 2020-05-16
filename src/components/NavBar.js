@@ -9,6 +9,7 @@ import Emoji from "react-emoji-render";
 import {LoginForm} from "./Forms/LoginForm";
 import {SignUpForm} from "./Forms/SignUpForm";
 import {Presentations} from "./Lists/Presentations";
+import {useHistory} from "react-router-dom";
 
 export const NavBar = ()  =>{
     const [count, setCount] = useState(false);
@@ -34,12 +35,11 @@ export const NavBar = ()  =>{
 
             <Nav fill className="mr-auto">
                 <Nav.Link href="/">Monday</Nav.Link>
-                {/*<Nav.Link href={`/schedule/${'Tuesday'}`}>Tuesday</Nav.Link>*/}
-                {/*<Nav.Link href="/schedules?name=Tuesday">Tuesday</Nav.Link>*/}
-                <Nav.Link to={`/schedules/${"Tuesday"}`} >Tuesday</Nav.Link>
+                <Nav.Link href="/schedules?day=Tuesday">Tuesday</Nav.Link>
                 <Nav.Link href="/presentations">Wednesday</Nav.Link>
                 <Nav.Link href="/rooms">Thursday</Nav.Link>
                 <Nav.Link href="/sessions">Friday</Nav.Link>
+                <Nav.Link href="/sessions">Reminders</Nav.Link>
             </Nav>
             <Form inline controlId="search">
                 <FormControl ref={textIn} type="text" placeholder="Search (tittle, author, keywords)" className="mr-sm-2" onChange={search} />

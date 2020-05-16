@@ -19,9 +19,9 @@ export const Presentations=(props)=>{
 
     return(
         <>
-            <span>
-                {presentation.map(pres => <Search key={pres.id} title={pres.title} keywordd={"Access "}/>)}
-            </span>
+            {/*<span>*/}
+            {/*    {presentation.map(pres => <Search key={pres.id} title={pres.title} keywordd={"Access "}/>)}*/}
+            {/*</span>*/}
             <ul>
                 {presentation.map(pres => <li key={pres.id}>{pres.title}</li>)}
             </ul>
