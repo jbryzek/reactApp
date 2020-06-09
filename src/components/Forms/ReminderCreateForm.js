@@ -13,7 +13,6 @@ export const ReminderCreateForm = (props) => {
         "enabled": enabled
     };
 
-
     const handleSubmit = (e) => {
         e.preventDefault();
         API.post('/reminders', payload, {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}})
@@ -38,7 +37,7 @@ export const ReminderCreateForm = (props) => {
                                       placeholder="Enter a note"/>
                     </Form.Group>
                     <Form.Group>
-                        <Form.Check type="checkbox" label="Enabled" onClick={()=>setEnabled(!enabled)}/>
+                        <Form.Check type="checkbox" label="Enabled" onChange={()=>setEnabled(!enabled)}/>
                     </Form.Group>
                     <Button variant="primary" type="submit">Create</Button>
                 </Form>

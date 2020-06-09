@@ -20,7 +20,6 @@ export const Reminders = () => {
             .catch((err) => console.error(err))
     }, []);
 
-
     const handleDelete = (id) => {
         API.delete(`/reminders/${id}`, {headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }})
             .then(console.log('deleted'))
@@ -42,8 +41,8 @@ export const Reminders = () => {
                         Created at: {reminder.updatedAt.substring(11,16)} {reminder.updatedAt.substring(0,10)} <br/> Enabled: {reminder.enabled.toString()}
                     </Card.Body>
                 </Card>
-                    <ReminderPutForm show={reminderUpdate} onHide={() => setReminderUpdate(false)} id={reminder.id}/>
-                    <ReminderForm show={showReminder} onHide={() => setShowReminder(false)} id={reminder.id}/>
+                    <ReminderPutForm show={reminderUpdate} onHide={() => setReminderUpdate(false)} id={reminder.id} ischecked={reminder.enabled.toString()}/>
+                    <ReminderForm show={showReminder} onHide={() => setShowReminder(false)} id={reminder.id} ischecked={reminder.enabled.toString()}/>
                 </Col>
             )}
             </Row>

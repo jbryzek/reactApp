@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Navbar} from "react-bootstrap";
 import Nav from "react-bootstrap/Nav";
 import Form from "react-bootstrap/Form";
@@ -9,15 +9,36 @@ import Emoji from "react-emoji-render";
 import {LoginForm} from "./Forms/LoginForm";
 import {SignUpForm} from "./Forms/SignUpForm";
 import {Link} from 'react-router-dom'
+import API from "./api";
+
+const Search=({keywordd,title})=>{
+    if(title===keywordd || title.includes(keywordd))
+        console.log(title);
+    //return <span>{title}</span>;
+    return <span/>
+};
 
 export const NavBar = () => {
     const [showLogin, setShowLogin] = useState(false);
     const [showSignUp, setShowSignUp] = useState(false);
+    const [presentation, setPresentation] = useState([]);
+
+    useEffect(() => {
+        API.get('/presentations')
+            .then((result) => {
+                setPresentation(result.data);
+            })
+            .catch((err) => console.error(err))
+    }, []);
 
     const search = () => {
         if (textIn.current.value.length > 0) {
             console.log(textIn.current.value);
-            //return <PresentationsSearch keyword={textIn.current.value}/>
+            return(
+                <span>
+                {presentation.map(pres => <Search key={pres.id} title={pres.title} keywordd={textIn.current.value}/>)}
+            </span>
+            )
         }
     };
     const textIn = React.createRef();

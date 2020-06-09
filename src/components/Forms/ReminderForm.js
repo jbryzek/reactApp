@@ -6,6 +6,7 @@ import API from "../api";
 export const ReminderForm = (props) => {
     const id = props.id;
     const [reminder, setReminder] = useState([]);
+    const ischecked = props.ischecked;
 
     useEffect(() => {
         API.get(`/reminders/${id}`, {headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }})
@@ -33,7 +34,7 @@ export const ReminderForm = (props) => {
                                       readOnly />
                     </Form.Group>
                     <Form.Group>
-                        {reminder.enabled===true?
+                        {ischecked==='true'?
                             <Form.Check type="checkbox" label="Enabled" disabled checked />:
                             <Form.Check type="checkbox" label="Enabled" disabled/>
                         }

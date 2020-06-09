@@ -6,9 +6,10 @@ import API from "../api";
 export const ReminderPutForm = (props) => {
     const id=props.id;
     let presentationId=0;
-    const [reminder, setReminder] = useState([]);
+    //const [reminder, setReminder] = useState([]);
     const [notes, setNotes] = useState("");
     const [enabled, setEnabled] = useState(false);
+    const ischecked = props.ischecked;
     const payload = {
         "presentationId": presentationId,
         "notes": notes,
@@ -18,11 +19,13 @@ export const ReminderPutForm = (props) => {
     useEffect(() => {
         API.get(`/reminders/${id}`, {headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }})
             .then((result) => {
-                setReminder(result.data);
+                //setReminder(result.data);
                 setNotes(result.data.notes)
+                if(ischecked==='true') setEnabled(true);
+                else setEnabled(false);
             })
             .catch((err) => console.error(err))
-    }, [id]);
+    }, [id, ischecked]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -48,12 +51,12 @@ export const ReminderPutForm = (props) => {
                                       placeholder="Enter a note"/>
                     </Form.Group>
                     <Form.Group>
-                        {reminder.enabled===true?
+                        {ischecked==='true'?
                             <Form.Check type="checkbox" label="Enabled" defaultChecked onClick={()=>setEnabled(!enabled)}/>:
                             <Form.Check type="checkbox" label="Enabled" onClick={()=>setEnabled(!enabled)}/>
                         }
                     </Form.Group>
-                    <Button variant="primary" type="submit">Create</Button>
+                    <Button variant="primary" type="submit">Update</Button>
                 </Form>
             </Modal.Body>
         </Modal>

@@ -7,6 +7,7 @@ import API from "../api";
 export const LoginForm = (props) => {
     const [emailIn, setEmail] = useState("");
     const [passwordIn, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -24,13 +25,6 @@ export const LoginForm = (props) => {
                 alert(errInfo);
             })
     };
-    const showPassword = () => {
-        let x = document.getElementById("formPassword");
-        if (x.type === "password")
-            x.type = "text";
-        else
-            x.type = "password";
-    };
 
     return (
         <Modal {...props}>
@@ -44,13 +38,13 @@ export const LoginForm = (props) => {
                         <Form.Control type="username" value={emailIn} onChange={e => setEmail(e.target.value)}
                                       placeholder="Enter username"/>
                     </Form.Group>
-                    <Form.Group controlId="formPassword">
+                    <Form.Group >
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" value={passwordIn} onChange={e => setPassword(e.target.value)}
+                        <Form.Control type={(showPassword)? "text":"password"} value={passwordIn} onChange={e => setPassword(e.target.value)}
                                       placeholder="Enter password"/>
                     </Form.Group>
-                    <Form.Group controlId="formCheckbox">
-                        <Form.Check type="checkbox" label="Show password" onClick={showPassword}/>
+                    <Form.Group>
+                        <Form.Check type="checkbox" label="Show password" onClick={()=>setShowPassword(!showPassword)}/>
                     </Form.Group>
                     <Button variant="primary" type="submit">Log in</Button>
                 </Form>

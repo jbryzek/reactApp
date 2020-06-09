@@ -68,28 +68,3 @@ export const PresentationsTitle = (props) => {
     return <span>{presentation.title}</span>
 };
 
-// const Search=({keywordd,title})=>{
-//     if(title===keywordd || title.includes(keywordd))
-//         console.log(title);
-//         //return <span>{title}</span>;
-//     return <span/>
-// };
-// export const PresentationsSearch = (props) => {
-//     const [presentation, setPresentation] = useState([]);
-//     const keyword = props.keyword;
-//
-//     useEffect(() => {
-//         API.get('/presentations')
-//             .then((result) => {
-//                 setPresentation(result.data);
-//             })
-//             .catch((err) => console.error(err))
-//     }, []);
-//
-//     return (
-//         <span>
-//                 {presentation.map(pres => <Search key={pres.id} title={pres.title} keywordd={keyword}/>)}
-//             </span>
-//     )
-// };
-
