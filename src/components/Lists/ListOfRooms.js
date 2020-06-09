@@ -14,11 +14,10 @@ export const ListOfRooms = (props) => {
 
     return (
         <>
-            {/*<span>Lng: {rooms['A']?.lng}</span><br/>*/}
             {/*<span>Name: {rooms['A']?.name}</span><br/>*/}
-            <ul>
-                {Object.values(rooms).map((room) => <li key={room}> {room.name}</li>)}
-            </ul>
+            {/*<ul>*/}
+            {/*    {Object.values(rooms).map((room) => <li key={room}> {room.name}</li>)}*/}
+            {/*</ul>*/}
             <span>{rooms[localization]?.name}</span>
         </>
     )

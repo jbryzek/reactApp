@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import API from "../api";
 import {Cards} from "../Cards";
-import {Button} from "react-bootstrap";
 
-export const Sessions = ()=>{
+export const Sessions = (props) => {
     const [session, setSession] = useState({});
-    const token = localStorage.getItem('token')
+    const name = props.sessionName;
+    const day = props.sessionDay;
 
     useEffect(() => {
         API.get('/sessions')
@@ -13,10 +13,9 @@ export const Sessions = ()=>{
             .catch((err) => console.error(err))
     }, []);
 
-    return(
+    return (
         <>
-            {/*<span>{session['FSIP']?.name}</span>*/}
-            <Cards name={session['FSIP']?.name} localization={session['FSIP']?.localization}/>
+            {<Cards name = {session[name]?.name} shortName={name} localization={session[name]?.localization} day={day} session={session}/>}
             </>
     )
-}
+};

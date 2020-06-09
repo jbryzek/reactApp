@@ -2,10 +2,8 @@ import React, {useState} from "react";
 import Form from "react-bootstrap/Form";
 import {Button} from "react-bootstrap";
 import API from "../api";
-import {Link, useHistory} from "react-router-dom";
 
 export const SignUpForm = () =>{
-    const history = useHistory();
     const [emailIn, setEmail] = useState("");
     const [passwordIn, setPassword] = useState("");
     const payload ={
@@ -17,11 +15,9 @@ export const SignUpForm = () =>{
         API.post('/users', payload)
             .then((response => {
                 localStorage.setItem('token', response.data.token)
-                history.push('/tasks') //nie dziala
             }))
             .catch((errInfo) => {
-                console.log('error')
-                //message.error(`Cannot register the user: ${errInfo.response.data}`);
+                alert(errInfo);
             })
     };
 

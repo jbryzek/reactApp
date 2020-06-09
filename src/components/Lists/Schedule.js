@@ -1,33 +1,37 @@
 import React, {useEffect, useState} from 'react'
 import API from "../api";
-import {
-    useParams
-} from "react-router-dom";
+import {useLocation} from 'react-router-dom';
+import queryString from 'query-string'
+import {Sessions} from "./Sessions";
+import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
+import Col from "react-bootstrap/Col";
 
-export const Schedule = (props) =>{
-    const [schedule, setSchedule] = useState([]);
-    const params={
-        "day":window.location.href.split('=')[1]
-    };
-
-    const getDay = ()=>{
-        return window.location.href.split('=')[1]
-    };
+export const Schedule = (props) => {
+    const [schedule, setSchedule] = useState(null);
+    const [day, setDay] = useState('');
+    const location = useLocation();
 
     useEffect(() => {
-        API.get('/schedules',params)
-            .then((result) => setSchedule(result.data))
+        const query = queryString.parse(location.search);
+        setDay(query.day);
+        API.get(`/schedules?day=${query.day}`)
+            .then((result) => {
+                setSchedule(result.data[0][query.day.toUpperCase()]);
+            })
             .catch((err) => console.error(err))
-    }, []);
+    }, [location]);
 
 
-    return(
-        <>
-            <span>{getDay()}</span><br/>
-            <span>tu: {schedule[0]}</span>
-            {/*<ul>*/}
-            {/*    {schedule[0]['TUESDAY'].map(session => <li key={session.start}>{session.start}</li>)}*/}
-            {/*</ul>*/}
-        </>
+    return (
+        <Container>
+            <Row>
+                {schedule?.map(session => session.sessions.map(s => <Col key={day + s} sm={6} lg={4}> <Sessions
+                                                                                           sessionName={s}
+                                                                                           sessionDay={session.start.substring(0, 10)}> </Sessions>
+                    </Col>)
+                )}
+            </Row>
+        </Container>
     )
 };

@@ -2,13 +2,13 @@ import React, {useState} from "react";
 import Form from "react-bootstrap/Form";
 import {Button, Modal} from "react-bootstrap";
 import API from "../api";
-import {Link, useHistory} from "react-router-dom";
+import { useHistory} from "react-router-dom";
 
 
 export const LoginForm=()=>{
-    const history = useHistory();
     const [emailIn, setEmail] = useState("");
     const [passwordIn, setPassword] = useState("");
+    const history = useHistory();
 
     const handleSubmit= () =>{
         API.post('/auth', {}, {
@@ -18,12 +18,11 @@ export const LoginForm=()=>{
             }
         })
             .then((response => {
-                localStorage.setItem('token',response.data.token)
-                history.push('/') //nie dziala
+                localStorage.setItem('token',response.data.token);
+                history.push("/reminders")
             }))
             .catch((errInfo) => {
-                console.log('zle')
-                //message.error(`Wrong username or password`);
+                alert(errInfo);
             })
     };
     const showPassword=()=>{

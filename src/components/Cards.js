@@ -1,45 +1,22 @@
-import React, {useEffect, useState} from 'react'
-import {Card, ListGroup, ListGroupItem} from "react-bootstrap";
+import React from 'react'
+import {Card} from "react-bootstrap";
 import {ListOfRooms} from "./Lists/ListOfRooms";
+import {Presentations} from "./Lists/Presentations";
 
 export const Cards = (props) => {
     const name = props.name;
     const localization = props.localization;
+    const day = props.day;
+    const session = props.session;
+    const shortName = props.shortName;
 
     return (
-        <div class='container'>
-            <div class='row'>
-                <div class='col-md-4'>
-                    <Card>
-                        <Card.Body>
-                            <Card.Header>{name}</Card.Header>
-                        </Card.Body>
-                        <ListGroup>
-                            <ListGroupItem> <ListOfRooms localization={localization}/></ListGroupItem>
-                        </ListGroup>
-                    </Card>
-                </div>
-                <div className='col-md-4'>
-                <Card >
-                    <Card.Body>
-                        <Card.Header>{name}</Card.Header>
-                    </Card.Body>
-                    <ListGroup>
-                        <ListGroupItem> <ListOfRooms localization={localization}/></ListGroupItem>
-                    </ListGroup>
-                </Card>
-                </div>
-                <div className='col-md-4'>
-                <Card >
-                    <Card.Body>
-                        <Card.Header>{name}</Card.Header>
-                    </Card.Body>
-                    <ListGroup>
-                        <ListGroupItem> <ListOfRooms localization={localization}/></ListGroupItem>
-                    </ListGroup>
-                </Card>
-                </div>
-            </div>
-        </div>
+        <Card>
+            <Card.Header as="h5" style={{fontWeight: 'bold'}}>{name}</Card.Header>
+            <Card.Body>
+                <Card.Title><ListOfRooms localization={localization}/></Card.Title>
+                <Card.Text> <Presentations day={day} shortName={shortName} session={session}/></Card.Text>
+            </Card.Body>
+        </Card>
     )
 };
