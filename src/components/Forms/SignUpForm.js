@@ -11,7 +11,8 @@ export const SignUpForm = () =>{
             "password": passwordIn
     };
 
-    const handleSubmit=()=>{
+    const handleSubmit=(e)=>{
+        e.preventDefault();
         API.post('/users', payload)
             .then((response => {
                 localStorage.setItem('token', response.data.token)

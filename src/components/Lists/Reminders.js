@@ -20,7 +20,7 @@ export const Reminders = () => {
     };
 
     useEffect(() => {
-        API.get('/reminders')
+        API.get('/reminders', {headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }})
             .then((result) => setReminders(result.data))
             .catch((err) => console.error(err))
     }, []);

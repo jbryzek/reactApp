@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import Form from "react-bootstrap/Form";
 import {Button, Modal} from "react-bootstrap";
 import API from "../api";
-import { useHistory} from "react-router-dom";
+import { useHistory } from "react-router";
 
 
 export const LoginForm=()=>{
@@ -10,7 +10,8 @@ export const LoginForm=()=>{
     const [passwordIn, setPassword] = useState("");
     const history = useHistory();
 
-    const handleSubmit= () =>{
+    const handleSubmit= (e) =>{
+        e.preventDefault();
         API.post('/auth', {}, {
             auth: {
                 username: emailIn,
