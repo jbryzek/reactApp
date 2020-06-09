@@ -25,7 +25,7 @@ export const Reminders = () => {
             .catch((err) => console.error(err))
     }, []);
 
-    const handleSubmit=()=>{
+    const handleSubmit=(payload)=>{
         API.post('/reminders', payload)
             // .then((result) => setReminders(result.data))
             .catch((errInfo) => {
