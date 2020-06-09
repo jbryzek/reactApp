@@ -1,12 +1,9 @@
 import React from 'react'
 import {
     Switch,
-    Route
-} from "react-router-dom";
-import {ListOfRooms} from "./Lists/ListOfRooms";
+    Route, Redirect
+} from "react-router";
 import {Schedule} from "./Lists/Schedule";
-import {Sessions} from "./Lists/Sessions";
-import {Presentations} from "./Lists/Presentations";
 import {Abstracts} from "./Lists/Abstracts";
 import {Reminders} from "./Lists/Reminders";
 
@@ -14,21 +11,13 @@ export const Routing = () =>{
     return(
         <>
             <Switch>
+                <Redirect exact from="/" to="/schedules?day=Monday" />
                 <Route exact path = "/schedules?day=Monday">
                     <Schedule/>
                 </Route>
                 <Route path="/schedules">
                     <Schedule/>
                 </Route>
-                {/*<Route path="/rooms">*/}
-                {/*    <ListOfRooms/>*/}
-                {/*</Route>*/}
-                {/*<Route path="/sessions">*/}
-                {/*    <Sessions/>*/}
-                {/*</Route>*/}
-                {/*<Route path="/presentations">*/}
-                {/*    <Presentations/>*/}
-                {/*</Route>*/}
                 <Route path="/abstracts">
                     <Abstracts/>
                 </Route>
@@ -38,4 +27,4 @@ export const Routing = () =>{
             </Switch>
         </>
     )
-}
+};

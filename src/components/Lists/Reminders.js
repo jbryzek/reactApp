@@ -1,23 +1,18 @@
 import React, {useEffect, useState} from "react";
 import API from '../api'
-import {BsFilePlus} from "react-icons/all";
-import {Button, Modal} from "react-bootstrap";
-import Form from "react-bootstrap/Form";
+import {Card} from "react-bootstrap";
+import {PresentationsTitle} from "./Presentations";
+import {BsInfoSquare, BsTools, BsTrash} from "react-icons/all";
+import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
+import Col from "react-bootstrap/Col";
+import {ReminderPutForm} from "../Forms/ReminderPutForm";
+import {ReminderForm} from "../Forms/ReminderForm";
 
 export const Reminders = () => {
     const [reminders, setReminders] = useState([]);
-
+    const [reminderUpdate, setReminderUpdate] = useState(false);
     const [showReminder, setShowReminder] = useState(false);
-    const handleCloseReminder = () => setShowReminder(false);
-    const handleShowReminder = () => setShowReminder(true);
-    const [presentationId, setPresentationId] = useState("");
-    const [notes, setNotes] = useState("");
-    const [enabled, setEnabled] = useState(false);
-    const payload ={
-        "presentationId": presentationId,
-        "notes": notes,
-        "enabled": false
-    };
 
     useEffect(() => {
         API.get('/reminders', {headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }})
@@ -25,51 +20,33 @@ export const Reminders = () => {
             .catch((err) => console.error(err))
     }, []);
 
-    const handleSubmit=(payload)=>{
-        API.post('/reminders', payload)
-            // .then((result) => setReminders(result.data))
-            .catch((errInfo) => {
-                console.log('error')
-            })
-    };
 
     const handleDelete = (id) => {
-        API.delete(`/reminders/${id}`)
-            .catch((error) => console.error(error));
-    };
-
-    const createReminder=()=>{
-        handleShowReminder()
+        API.delete(`/reminders/${id}`, {headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }})
+            .then(console.log('deleted'))
+            .catch((errInfo) => alert(errInfo));
+        window.location.reload();
     };
 
     return (
-        <>
-            <BsFilePlus size='4em' onClick={createReminder}></BsFilePlus>
-            {reminders.length>0? <span>sth</span>
-            :
-                <span>nothing</span>}
+        <Container>
+            <Row>
+            {reminders.map(reminder=>
+                <Col key={reminder.id} sm={6} lg={4}>
+                <Card>
+                    <Card.Header as="h5" style={{fontWeight: 'bold'}}>
+                        <PresentationsTitle id={reminder.presentationId}/> <BsTools onClick={()=>setReminderUpdate(true)}/> <BsInfoSquare onClick={()=>setShowReminder(true)}/> <BsTrash onClick={()=>handleDelete(reminder.id)}/>
 
-            {/*<Modal show={showReminder} onHide={handleCloseReminder}>*/}
-            {/*    <Modal.Header closeButton>*/}
-            {/*        <Modal.Title>Reminder form</Modal.Title>*/}
-            {/*    </Modal.Header>*/}
-            {/*    <Modal.Body>*/}
-            {/*        <Form noValidate onSubmit={handleSubmit}>*/}
-            {/*            <Form.Group controlId="formPresId">*/}
-            {/*                <Form.Label>Id</Form.Label>*/}
-            {/*                <Form.Control type="id" value={presentationId} onChange={e => setPresentationId(e.target.value)} placeholder="Enter id"/>*/}
-            {/*            </Form.Group>*/}
-            {/*            <Form.Group controlId="formNotes">*/}
-            {/*                <Form.Label>Notes</Form.Label>*/}
-            {/*                <Form.Control type="notes" value={notes} onChange={e => setNotes(e.target.value)} placeholder="Enter notes"/>*/}
-            {/*            </Form.Group>*/}
-            {/*            <Form.Group controlId="formCheckbox">*/}
-            {/*                <Form.Check type="checkbox" label="Enable" onClick={setEnabled(!enabled)}/>*/}
-            {/*            </Form.Group>*/}
-            {/*            <Button variant="primary" type="submit">Create</Button>*/}
-            {/*        </Form>*/}
-            {/*    </Modal.Body>*/}
-            {/*</Modal>*/}
-        </>
+                    </Card.Header>
+                    <Card.Body>
+                        Created at: {reminder.updatedAt.substring(11,16)} {reminder.updatedAt.substring(0,10)} <br/> Enabled: {reminder.enabled.toString()}
+                    </Card.Body>
+                </Card>
+                    <ReminderPutForm show={reminderUpdate} onHide={() => setReminderUpdate(false)} id={reminder.id}/>
+                    <ReminderForm show={showReminder} onHide={() => setShowReminder(false)} id={reminder.id}/>
+                </Col>
+            )}
+            </Row>
+        </Container>
     )
 };

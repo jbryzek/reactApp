@@ -15,7 +15,7 @@ export const Cards = (props) => {
             <Card.Header as="h5" style={{fontWeight: 'bold'}}>{name}</Card.Header>
             <Card.Body>
                 <Card.Title><ListOfRooms localization={localization}/></Card.Title>
-                <Card.Text> <Presentations day={day} shortName={shortName} session={session}/></Card.Text>
+                 <Presentations day={day} shortName={shortName} session={session}/>
             </Card.Body>
         </Card>
     )
