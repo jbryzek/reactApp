@@ -10,9 +10,10 @@ import {LoginForm} from "./Forms/LoginForm";
 import {SignUpForm} from "./Forms/SignUpForm";
 import {Link} from 'react-router-dom'
 import API from "./api";
+import {useHistory} from "react-router-dom";
 
-const Search=({keywordd,title})=>{
-    if(title===keywordd || title.includes(keywordd))
+const Search = ({keywordd, title}) => {
+    if (title === keywordd || title.includes(keywordd))
         console.log(title);
     //return <span>{title}</span>;
     return <span/>
@@ -22,6 +23,8 @@ export const NavBar = () => {
     const [showLogin, setShowLogin] = useState(false);
     const [showSignUp, setShowSignUp] = useState(false);
     const [presentation, setPresentation] = useState([]);
+    const [token, setToken] = useState(false);
+    const history = useHistory();
 
     useEffect(() => {
         API.get('/presentations')
@@ -34,7 +37,7 @@ export const NavBar = () => {
     const search = () => {
         if (textIn.current.value.length > 0) {
             console.log(textIn.current.value);
-            return(
+            return (
                 <span>
                 {presentation.map(pres => <Search key={pres.id} title={pres.title} keywordd={textIn.current.value}/>)}
             </span>
@@ -48,8 +51,10 @@ export const NavBar = () => {
     };
 
     const logOut = () => {
+        setToken(false);
         localStorage.removeItem('token');
-        window.location.reload();
+        if (window.location.pathname.includes('reminders'))
+            history.push("/schedules?day=Monday");
     };
 
     return (
@@ -73,7 +78,7 @@ export const NavBar = () => {
                     <FormControl ref={textIn} type="text" placeholder="Search (tittle, author, keywords)"
                                  className="mr-sm-2" onChange={search}/>
                 </Form>
-                {isLoggedIn() ?
+                {isLoggedIn() && token===false ?
                     <>
                         <Button variant="outline-info "
                                 onClick={() => setShowLogin(true)}>
@@ -96,8 +101,8 @@ export const NavBar = () => {
                 }
             </div>
 
-            <LoginForm show={showLogin} onHide={() => setShowLogin(false)}/>
-            <SignUpForm show={showSignUp} onHide={() => setShowSignUp(false)}/>
+            <LoginForm show={showLogin} onHide={() => {setShowLogin(false); if(localStorage.getItem('token')!= null) setToken(true)}}/>
+            <SignUpForm show={showSignUp} onHide={() => {setShowSignUp(false); if(localStorage.getItem('token')!= null) setToken(true)}}/>
         </Navbar>
     )
 };
