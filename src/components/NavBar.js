@@ -55,6 +55,8 @@ export const NavBar = () => {
         localStorage.removeItem('token');
         if (window.location.pathname.includes('reminders'))
             history.push("/schedules?day=Monday");
+        else
+            window.location.reload();
     };
 
     return (
@@ -101,8 +103,8 @@ export const NavBar = () => {
                 }
             </div>
 
-            <LoginForm show={showLogin} onHide={() => {setShowLogin(false); if(localStorage.getItem('token')!= null) setToken(true)}}/>
-            <SignUpForm show={showSignUp} onHide={() => {setShowSignUp(false); if(localStorage.getItem('token')!= null) setToken(true)}}/>
+            <LoginForm show={showLogin} onHide={() => {setShowLogin(false); if(localStorage.getItem('token')!= null) setToken(true); window.location.reload()}}/>
+            <SignUpForm show={showSignUp} onHide={() => {setShowSignUp(false); if(localStorage.getItem('token')!= null) setToken(true); window.location.reload()}}/>
         </Navbar>
     )
 };

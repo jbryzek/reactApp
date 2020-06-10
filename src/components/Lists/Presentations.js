@@ -36,6 +36,10 @@ export const Presentations = (props) => {
         history.push(`/abstracts/${name}`);
     };
 
+    const isLoggedIn = () => {
+        return localStorage.getItem('token') != null;
+    };
+
     return (
         <>
             {presentation.map(pres => <div key={pres.id}>
@@ -46,7 +50,7 @@ export const Presentations = (props) => {
                 {pres.filename !== "" ?
                     <BsFileEarmarkArrowDown onClick={() => openAbstract(pres.filename)}/>
                     : <span> </span>}
-                <BsFilePlus size='1em' onClick={() => setReminder(true)}/>
+                {isLoggedIn()?<BsFilePlus size='1em' onClick={() => setReminder(true)}/>:<span/>}
                 <ReminderCreateForm show={reminder} onHide={() => setReminder(false)} id={pres.id}/>
             </div>)}
         </>
