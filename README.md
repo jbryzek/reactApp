@@ -1,3 +1,3 @@
 # project-jbryzek
-project-jbryzek299668 created by GitHub Classroom
+created by GitHub Classroom
 Justyna Bryzek
